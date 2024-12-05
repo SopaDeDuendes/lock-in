@@ -1,0 +1,25 @@
+{
+  "project_1": {
+    "id": "1",
+    "name": "Redacción de informe de tesis",
+    "sessions": [
+      {
+        "date": "2024-12-03",
+        "start_time": "10:00",
+        "end_time": "10:30",
+        "duration": 30,
+        "tasks": [
+          { "task": "Escribir introducción", "done": true },
+          { "task": "Revisar referencias", "done": false }
+        ]
+      },
+      {
+        "date": "2024-12-03",
+        "start_time": "14:00",
+        "end_time": "15:00",
+        "duration": 60,
+        "tasks": [{ "task": "Revisar bibliografía", "done": true }]
+      }
+    ]
+  }
+}
