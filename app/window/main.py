@@ -6,6 +6,7 @@ from PyQt6.QtGui import QFont
 from pages.home import Home
 from pages.topics import Topics
 from pages.projects import Projects
+from app.window.pages.resource_manager import ResourceManager
 
 
 class MainWindow(QMainWindow):
@@ -40,8 +41,9 @@ class MainWindow(QMainWindow):
         btn_page1 = QPushButton("Start")
         btn_page2 = QPushButton("Topics")
         btn_page3 = QPushButton("Projects")
+        btn_page4 = QPushButton("Resources")
 
-        for btn in [btn_page1, btn_page2, btn_page3]:
+        for btn in [btn_page1, btn_page2, btn_page3,btn_page4]:
             btn.setStyleSheet("padding: 10px; border: none; color: #785fa0; background-color: #1E1E1E;")
             btn.setCursor(Qt.CursorShape.PointingHandCursor)
             aside_layout.addWidget(btn)
@@ -50,12 +52,14 @@ class MainWindow(QMainWindow):
         btn_page1.clicked.connect(lambda: self.change_page(0))
         btn_page2.clicked.connect(lambda: self.change_page(1))
         btn_page3.clicked.connect(lambda: self.change_page(2))
+        btn_page4.clicked.connect(lambda: self.change_page(3))
 
         # Espacio principal (donde se renderizan las páginas)
         self.pages = QStackedWidget()
         self.pages.addWidget(Home())
         self.pages.addWidget(Topics())
         self.pages.addWidget(Projects())
+        self.pages.addWidget(ResourceManager())
 
         # Añadimos aside y espacio principal al layout
         main_layout.addWidget(aside_widget)

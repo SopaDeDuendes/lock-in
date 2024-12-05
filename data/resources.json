@@ -1,0 +1,20 @@
+{
+  "pdf": [
+    "C:\\Users\\erick\\Desktop\\resources\\Tratado general de ajedrez. Tomo I - Roberto Grau.pdf",
+    "C:\\Users\\erick\\Desktop\\resources\\Los_100_finales_que_hay_que_saber_-_jesus_de_la_villa.pdf"
+  ],
+  "link": [
+    {
+      "url": "https://www.youtube.com/watch?v=YxAiZolzGbM&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVMYxAiZolzGbM&start_radio=1",
+      "title": "YouTube Video"
+    },
+    {
+      "url": "https://latam.kaspersky.com/resource-center/definitions/what-is-cyber-security",
+      "title": "What is Cyber Security - Kaspersky"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=dsUXAEzaC3Q&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVMYxAiZolzGbM&index=6",
+      "title": "Another YouTube Video"
+    }
+  ]
+}
