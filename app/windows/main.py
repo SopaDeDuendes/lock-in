@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QPushButton, QWidget, QHBoxLayout, QStackedWidget
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont
 
 # Importamos las páginas
 from pages.home import Home
@@ -16,6 +17,10 @@ class MainWindow(QMainWindow):
         # Configuración principal de la ventana
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
+
+        # Aplicamos la fuente global (Cascadia Code)
+        font = QFont('Cascadia Code', 10)  # Usamos Cascadia Code
+        QApplication.setFont(font)
 
         # Layout principal (horizontal: aside + espacio de contenido)
         main_layout = QHBoxLayout(central_widget)
@@ -36,8 +41,7 @@ class MainWindow(QMainWindow):
         btn_page2 = QPushButton("Topics")
         btn_page3 = QPushButton("Projects")
 
-
-        for btn in [btn_page1, btn_page2,btn_page3]:
+        for btn in [btn_page1, btn_page2, btn_page3]:
             btn.setStyleSheet("padding: 10px; border: none; color: #785fa0; background-color: #1E1E1E;")
             btn.setCursor(Qt.CursorShape.PointingHandCursor)
             aside_layout.addWidget(btn)
@@ -47,13 +51,11 @@ class MainWindow(QMainWindow):
         btn_page2.clicked.connect(lambda: self.change_page(1))
         btn_page3.clicked.connect(lambda: self.change_page(2))
 
-
         # Espacio principal (donde se renderizan las páginas)
         self.pages = QStackedWidget()
         self.pages.addWidget(Home())
         self.pages.addWidget(Topics())
         self.pages.addWidget(Projects())
-
 
         # Añadimos aside y espacio principal al layout
         main_layout.addWidget(aside_widget)
