@@ -1,8 +1,9 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QScrollArea, QLabel, QFrame
-from widgets.card_info import CardInfo  # Importa la clase CardInfo
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QScrollArea, QFrame
+from widgets.card_overview import CardOverview  # Importar CardOverview
+from widgets.card_detail import CardDetail  # Importar CardDetail
 
 class Projects(QWidget):
-    def __init__(self):
+    # def __init__(self):
         super().__init__()
 
         self.setWindowTitle("Projects")
@@ -57,16 +58,19 @@ class Projects(QWidget):
                     ]}
                 ]
             },
-            # Otros proyectos aquí
         ]
 
-        # Crear las tarjetas de los proyectos
+        # Crear las tarjetas de resumen (CardOverview) y los detalles (CardDetail)
         self.cards = []
         for project in projects_data:
-            card = CardInfo(project['name'], project['activity_log'])
-            card.mousePressEvent = lambda event, p=project: self.show_project_logs(p)  # Conectar clic al log
-            self.cards.append(card)
-            left_layout.addWidget(card)
+            # Calcular el tiempo total invertido en el proyecto
+            total_time_spent = sum(log['time_spent'] for log in project['activity_log'])
+
+            # Crear la tarjeta de resumen (CardOverview)
+            card_overview = CardOverview(project['name'], total_time_spent)
+            card_overview.mousePressEvent = lambda event, p=project: self.show_project_logs(p)  # Conectar clic al log
+            self.cards.append(card_overview)
+            left_layout.addWidget(card_overview)
 
     def show_project_logs(self, project):
         # Limpiar los logs actuales del aside
@@ -74,10 +78,6 @@ class Projects(QWidget):
             child = self.logs_area.layout().itemAt(i).widget()
             child.deleteLater()
 
-        # Mostrar logs del proyecto seleccionado
-        logs_layout = QVBoxLayout(self.logs_area)
-        for log in project['activity_log']:
-            log_entry = QLabel(f"{log['date']} - Time spent: {log['time_spent']} mins")
-            logs_layout.addWidget(log_entry)
-
-        self.logs_area.setLayout(logs_layout)
+        # Crear el CardDetail para el proyecto seleccionado
+        card_detail = CardDetail(project['activity_log'])
+        self.logs_area.layout().addWidget(card_detail)
