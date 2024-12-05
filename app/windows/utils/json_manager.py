@@ -100,3 +100,15 @@ class JsonManager:
             os.remove(file_path)
             return True
         return False
+def load_projects_data(filename="projects_data.json"):
+    """Loads project data from the JSON file."""
+    try:
+        with open(filename, "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+def save_project_data(project_data, filename="data/projects.json"):
+    """Saves project data to the JSON file."""
+    with open(filename, "w") as file:
+        json.dump(project_data, file, indent=4)
