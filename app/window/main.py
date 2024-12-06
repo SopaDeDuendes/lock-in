@@ -9,6 +9,28 @@ from pages.topics import Topics
 from pages.projects import Projects
 from app.window.pages.resource_manager import ResourceManager
 
+
+class CustomButton(QPushButton):
+    def __init__(self, text):
+        super().__init__(text)
+        self.setCheckable(True)  # Permite que el botón pueda quedarse en estado presionado
+        self.setStyleSheet("""
+            QPushButton {
+                padding: 10px;
+                border: none;
+                color: #ae76ff;
+                background-color: #1E1E1E;
+                font-weight: bold;
+            }
+            QPushButton:hover {
+                background-color: rgba(138, 43, 226, 0.5);  /* Gris-morado opaco al pasar el mouse */
+            }
+            QPushButton:checked {
+                background-color: rgba(138, 43, 226, 0.5);  /* Gris-morado opaco cuando está seleccionado */
+            }
+        """)
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -33,7 +55,7 @@ class MainWindow(QMainWindow):
 
         # Aside
         aside_layout = QVBoxLayout()
-        aside_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        aside_layout.setAlignment(Qt.AlignmentFlag.AlignVCenter)  # Centra el contenido verticalmente
         aside_layout.setContentsMargins(0, 0, 0, 0)  # Asegúrate de que no haya márgenes dentro del aside
         aside_widget = QWidget()
         aside_widget.setLayout(aside_layout)
@@ -41,21 +63,16 @@ class MainWindow(QMainWindow):
         aside_widget.setStyleSheet("background-color: #1E1E1E; color: #53fc18;")
 
         # Botones del aside
-        btn_page1 = QPushButton("Start")
-        btn_page2 = QPushButton("Topics")
-        btn_page3 = QPushButton("Projects")
-        btn_page4 = QPushButton("Resources")
+        self.buttons = [
+            CustomButton("Start"),
+            CustomButton("Topics"),
+            CustomButton("Projects"),
+            CustomButton("Resources")
+        ]
 
-        for btn in [btn_page1, btn_page2, btn_page3, btn_page4]:
-            btn.setStyleSheet("padding: 10px; border: none; color: #ae76ff; background-color: #1E1E1E;font-weight:bold;")
-            btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        for index, btn in enumerate(self.buttons):
+            btn.clicked.connect(lambda _, i=index: self.change_page(i))  # Conectar botones a las páginas
             aside_layout.addWidget(btn)
-
-        # Conexiones
-        btn_page1.clicked.connect(lambda: self.change_page(0))
-        btn_page2.clicked.connect(lambda: self.change_page(1))
-        btn_page3.clicked.connect(lambda: self.change_page(2))
-        btn_page4.clicked.connect(lambda: self.change_page(3))
 
         # Espacio principal (donde se renderizan las páginas)
         self.pages = QStackedWidget()
@@ -68,20 +85,13 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(aside_widget)
         main_layout.addWidget(self.pages, stretch=1)
 
-        # CSS global (opcional, puedes cargar desde un archivo)
-        self.setStyleSheet("""
-            QMainWindow {
-                background-color: #1E1E1E;
-                color: #53fc18;
-            }
-            QPushButton:hover {
-                background-color: #1abc9c;
-            }
-        """)
-
     def change_page(self, index):
-        """Cambia la página en el QStackedWidget"""
+        """Cambia la página en el QStackedWidget y actualiza el estado de los botones"""
         self.pages.setCurrentIndex(index)
+        # Actualizar el estado de los botones
+        for i, btn in enumerate(self.buttons):
+            btn.setChecked(i == index)
+
 
 if __name__ == "__main__":
     import sys

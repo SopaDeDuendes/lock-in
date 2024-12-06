@@ -1,7 +1,8 @@
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal
-from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget, QApplication
+from PyQt6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QWidget,QApplication
 from PyQt6.QtGui import QFont
 import sys
+
 
 class SplashScreen(QMainWindow):
     finished = pyqtSignal()  # Señal para indicar que el splash ha terminado
@@ -23,8 +24,8 @@ class SplashScreen(QMainWindow):
         self.layout = QVBoxLayout(self.centralwidget)
         self.layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        # Gato ASCII con texto "LOCK - IN"
-        self.cat_ascii = """
+        # Gato ASCII (dos estados: ojos abiertos y ojos cerrados)
+        self.cat_ascii_open = """
 ⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀
@@ -49,20 +50,45 @@ class SplashScreen(QMainWindow):
 ⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀
         """
+        self.cat_ascii_closed = """
+⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⣾⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⣼⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣠⣤⣤⣼⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀
+⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀
+⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀
+⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀
+⢀⣀⣀⣀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣤⠤⢤⣤⡄
+⠈⠉⠉⢉⣙⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⣀⣀⣀⡀⠀
+⠐⠚⠋⠉⢀⣬⡿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⣥⣀⡀⠈⠀⠈⠛
+⠀⠀⠴⠚⠉⠀⠀⠀⠉⠛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⠋⠁⠀⠀⠀⠉⠛⠢⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀
+"""
 
-        # Etiqueta para mostrar el gato y "LOCK - IN"
-        self.cat_label = QLabel(self.cat_ascii, self)
-
+        # Etiqueta para mostrar el gato
+        self.cat_label = QLabel(self.cat_ascii_open, self)
         self.cat_label.setStyleSheet("color: #ae76ff; font-size: 10px;")
         self.cat_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
+        # Etiqueta de "LOCK - IN"
         self.lockin_label = QLabel("LOCK - IN", self)
         self.lockin_label.setStyleSheet("color: #ae76ff; font-size: 32px;")
         self.lockin_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Widget de barra de carga con ASCII
         self.progress_label = QLabel(self)
-        self.progress_label.setStyleSheet("color: #ae76ff;font-size: 14px;")
+        self.progress_label.setStyleSheet("color: #ae76ff; font-size: 14px;")
         self.progress_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Añadimos los elementos al layout
@@ -70,33 +96,50 @@ class SplashScreen(QMainWindow):
         self.layout.addWidget(self.lockin_label)
         self.layout.addWidget(self.progress_label)
 
-        # Inicializar los valores de la barra de progreso
+        # Configuración de la animación de parpadeo
+        self.blink_state = True  # Comienza con los ojos abiertos
+        self.blink_timer = QTimer(self)
+        self.blink_timer.timeout.connect(self.toggle_blink)
+        self.blink_timer.start(1000)  # Parpadea cada 500ms
+
+        # Configuración de la barra de progreso
         self.progress = 0
         self.progress_timer = QTimer(self)
         self.progress_timer.timeout.connect(self.update_progress)
-        self.progress_timer.start(500)  # Actualiza cada 500ms
+        self.progress_timer.start(100)  # Actualiza cada 100ms
 
-        # Temporizador para finalizar la animación en 5 segundos
+        # Temporizador para finalizar la animación
         self.animation_timer = QTimer(self)
         self.animation_timer.timeout.connect(self.finish_loading)
-        self.animation_timer.start(3000)  # 5 segundos
+        self.animation_timer.start(3000)  # 3 segundos
+
+    def toggle_blink(self):
+        """Alterna entre los ojos abiertos y cerrados."""
+        self.blink_state = not self.blink_state
+        self.cat_label.setText(self.cat_ascii_open if self.blink_state else self.cat_ascii_closed)
 
     def update_progress(self):
         """Actualiza la barra de carga ASCII."""
-        self.progress += 20  # Aumenta el progreso de forma más rápida para completar en 5 segundos
+        self.progress += 10
         if self.progress > 100:
             self.progress = 100
-        
-        # Crear la barra de progreso con ASCII
+
         progress_bar = "[" + "=" * (self.progress // 10) + "-" * (10 - self.progress // 10) + "]"
         self.progress_label.setText(f"{progress_bar} {self.progress}%")
-        
+
         if self.progress == 100:
             self.progress_timer.stop()
 
     def finish_loading(self):
         """Finaliza la pantalla de carga y cierra el splash."""
+        self.blink_timer.stop()
         self.animation_timer.stop()
-        self.finished.emit()  # Emitir señal cuando la pantalla de carga termine
-        self.close()  # Cerrar la pantalla de splash
+        self.finished.emit()
+        self.close()
 
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    splash = SplashScreen()
+    splash.show()
+    sys.exit(app.exec())
