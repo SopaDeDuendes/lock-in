@@ -2,11 +2,10 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QScrollArea, QSizePolicy, QLabel
 )
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QColor, QPainter
 from app.window.widgets.card_overview import CardOverview
 from app.window.widgets.card_detail import CardDetail
 from utils.json_manager import JsonManager
-from widgets.heatmap_widget import HeatmapWidget
+from widgets.annual_heatmap_widget import AnnualHeatmapWidget
 
 class Projects(QWidget):
     def __init__(self):
@@ -53,6 +52,7 @@ class Projects(QWidget):
         self.right_scroll_area.setWidgetResizable(True)
         self.right_scroll_area.setWidget(self.right_widget)
 
+        
         # Agregar layouts al principal
         main_layout.addWidget(left_scroll_area)
         main_layout.addWidget(self.right_scroll_area)
@@ -86,12 +86,11 @@ class Projects(QWidget):
         card_overview.mousePressEvent = lambda event, p=project: self.show_project_logs(p)
         self.cards.append(card_overview)
 
-        # Crear el heatmap
-        heatmap_widget = HeatmapWidget(project['sessions'])
+        
 
         # Agregar tarjeta y heatmap al contenedor
         project_layout.addWidget(card_overview)
-        project_layout.addWidget(heatmap_widget)
+        
 
         # Agregar el contenedor al layout padre
         parent_layout.addWidget(project_container)
@@ -108,13 +107,19 @@ class Projects(QWidget):
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         title_label.setWordWrap(True)
 
-        # Crear el CardDetail con las sesiones del proyecto
-        card_detail = CardDetail(project['sessions'])
-        card_detail.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        # # Crear el CardDetail con las sesiones del proyecto
+        # card_detail = CardDetail(project['sessions'])
+        # card_detail.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        # Agregar título y detalles al aside
+        # Crear el calendario anual y pasarlo al contenedor
+        annual_calendar_widget = AnnualHeatmapWidget(project['sessions'])
+        annual_calendar_widget.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        # Agregar título, detalles y calendario al aside
         self.logs_area.layout().addWidget(title_label)
-        self.logs_area.layout().addWidget(card_detail)
+        self.logs_area.layout().addWidget(annual_calendar_widget)
+        # self.logs_area.layout().addWidget(card_detail)
+
 
     def resizeEvent(self, event):
         # Mostrar u ocultar el aside según el ancho de la ventana
