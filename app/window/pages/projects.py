@@ -1,4 +1,6 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QScrollArea
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QScrollArea,QSizePolicy
+from PyQt6.QtCore import Qt
+
 from app.window.widgets.card_overview import CardOverview  # Importar CardOverview
 from app.window.widgets.card_detail import CardDetail  # Importar CardDetail
 from utils.json_manager import JsonManager  # Importar JsonManager
@@ -24,23 +26,20 @@ class Projects(QWidget):
         left_scroll_area.setWidget(self.projects_area)
 
         # Layout derecho para los logs del proyecto seleccionado
-        right_widget = QWidget()  # Crear un widget para el lado derecho
-        right_layout = QVBoxLayout(right_widget)
+        self.right_widget = QWidget()  # Crear un widget para el lado derecho
+        right_layout = QVBoxLayout(self.right_widget)
         self.logs_area = QWidget()  # Aquí se mostrarán los logs
         self.logs_area.setLayout(QVBoxLayout())  # Asignar un layout a logs_area
         right_layout.addWidget(self.logs_area)
 
-        # Aplicar el estilo de fondo rojo al widget derecho
-        right_widget.setStyleSheet("background-color: red;")
-
         # Scroll area para el área de logs (lado derecho)
-        right_scroll_area = QScrollArea(self)
-        right_scroll_area.setWidgetResizable(True)
-        right_scroll_area.setWidget(right_widget)
+        self.right_scroll_area = QScrollArea(self)
+        self.right_scroll_area.setWidgetResizable(True)
+        self.right_scroll_area.setWidget(self.right_widget)
 
         # Agregamos ambos layouts (izquierdo y derecho)
         main_layout.addWidget(left_scroll_area)  # Agregar el área de scroll izquierdo
-        main_layout.addWidget(right_scroll_area)  # Agregar el área de scroll derecho
+        main_layout.addWidget(self.right_scroll_area)  # Agregar el área de scroll derecho
 
         # Inicializar JsonManager y cargar los datos
         self.json_manager = JsonManager()
@@ -71,4 +70,25 @@ class Projects(QWidget):
 
         # Crear el CardDetail para el proyecto seleccionado
         card_detail = CardDetail(project['sessions'])
+
+        # Ajustamos el ancho de card_detail para que no exceda el ancho del aside
+        max_width = self.projects_area.width()  # Obtener el ancho disponible en el área de proyectos
+        card_detail.setMaximumWidth(max_width)  # Limitar el ancho del widget de detalles al ancho disponible
+
+        # Asegurar que no se muestre el desplazamiento horizontal
+        card_detail.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)  # Expande solo horizontalmente
+
         self.logs_area.layout().addWidget(card_detail)
+
+    def resizeEvent(self, event):
+        # Obtenemos el ancho de la ventana
+        window_width = self.width()
+
+        # Si el ancho de la ventana es menor que 800px, ocultamos el aside
+        if window_width < 800:
+            self.right_scroll_area.setVisible(False)  # Ocultar el aside
+        else:
+            self.right_scroll_area.setVisible(True)  # Mostrar el aside
+
+        # Llamar al método base resizeEvent para asegurarnos de que el evento se maneje correctamente
+        super().resizeEvent(event)

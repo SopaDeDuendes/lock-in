@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QPushButton, QWidget, QHBoxLayout, QStackedWidget
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
+from splash_screen import SplashScreen  # Importa la pantalla de carga
 
 # Importamos las páginas
 from pages.home import Home
@@ -8,12 +9,14 @@ from pages.topics import Topics
 from pages.projects import Projects
 from app.window.pages.resource_manager import ResourceManager
 
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Aplicación PyQt6 Modular")
-        self.setGeometry(100, 100, 800, 600)
+
+        # Configuración para hacer la ventana a pantalla completa y sin botones
+        self.setWindowState(Qt.WindowState.WindowFullScreen)  # Pantalla completa
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint)  # Deshabilitar bordes, minimizar, maximizar y cerrar
 
         # Configuración principal de la ventana
         central_widget = QWidget()
@@ -43,8 +46,8 @@ class MainWindow(QMainWindow):
         btn_page3 = QPushButton("Projects")
         btn_page4 = QPushButton("Resources")
 
-        for btn in [btn_page1, btn_page2, btn_page3,btn_page4]:
-            btn.setStyleSheet("padding: 10px; border: none; color: #785fa0; background-color: #1E1E1E;")
+        for btn in [btn_page1, btn_page2, btn_page3, btn_page4]:
+            btn.setStyleSheet("padding: 10px; border: none; color: #ae76ff; background-color: #1E1E1E;font-weight:bold;")
             btn.setCursor(Qt.CursorShape.PointingHandCursor)
             aside_layout.addWidget(btn)
 
@@ -80,10 +83,20 @@ class MainWindow(QMainWindow):
         """Cambia la página en el QStackedWidget"""
         self.pages.setCurrentIndex(index)
 
-
 if __name__ == "__main__":
     import sys
     app = QApplication(sys.argv)
+
+    # Crear y mostrar la pantalla de carga
+    splash = SplashScreen()
+
+    # Crear la ventana principal
     window = MainWindow()
-    window.show()
+
+    # Conectar la señal de finalización de la pantalla de carga
+    splash.finished.connect(window.show)
+
+    # Mostrar la pantalla de carga
+    splash.show()
+
     sys.exit(app.exec())

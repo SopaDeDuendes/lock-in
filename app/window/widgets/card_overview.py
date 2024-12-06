@@ -8,11 +8,11 @@ class CardOverview(QWidget):
 
         # Nombre del proyecto en grande
         self.project_name_label = QLabel(project_name, self)
-        self.project_name_label.setStyleSheet("font-size: 20px; font-weight: bold; background-color: red;")
+        self.project_name_label.setStyleSheet("font-size: 20px; font-weight: bold; ")
 
         # Tiempo total invertido en el proyecto
         self.total_time_label = QLabel(f"Total Time: {total_time_spent} mins", self)
-        self.total_time_label.setStyleSheet("font-size: 18px; color: gray;background-color: red;")
+        self.total_time_label.setStyleSheet("font-size: 18px; color: gray;")
 
         layout.addWidget(self.project_name_label)
         layout.addWidget(self.total_time_label)

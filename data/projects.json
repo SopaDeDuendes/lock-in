@@ -10,15 +10,20 @@
         "duration": 30,
         "tasks": [
           { "task": "Escribir introducción", "done": true },
-          { "task": "Revisar referencias", "done": false }
+          { "task": "Revisar referencias", "done": false },
+          { "task": "Editar párrafo de resumen", "done": true }
         ]
       },
       {
-        "date": "2024-12-03",
+        "date": "2024-12-04",
         "start_time": "14:00",
         "end_time": "15:00",
         "duration": 60,
-        "tasks": [{ "task": "Revisar bibliografía", "done": true }]
+        "tasks": [
+          { "task": "Revisar bibliografía", "done": true },
+          { "task": "Agregar citas a la introducción", "done": false },
+          { "task": "Corregir formato de la portada", "done": false }
+        ]
       }
     ]
   },
@@ -33,7 +38,9 @@
         "duration": 120,
         "tasks": [
           { "task": "Diseñar prototipo", "done": true },
-          { "task": "Implementar pantalla de login", "done": false }
+          { "task": "Implementar pantalla de login", "done": false },
+          { "task": "Configurar base de datos", "done": false },
+          { "task": "Testear interacción de botones", "done": true }
         ]
       },
       {
@@ -43,7 +50,19 @@
         "duration": 150,
         "tasks": [
           { "task": "Configurar base de datos", "done": true },
-          { "task": "Testear funciones principales", "done": false }
+          { "task": "Testear funciones principales", "done": false },
+          { "task": "Verificar comunicación entre vistas", "done": false }
+        ]
+      },
+      {
+        "date": "2024-12-05",
+        "start_time": "10:00",
+        "end_time": "12:00",
+        "duration": 120,
+        "tasks": [
+          { "task": "Desarrollar pantallas secundarias", "done": false },
+          { "task": "Integrar servicios externos", "done": false },
+          { "task": "Realizar pruebas de UI", "done": true }
         ]
       }
     ]
@@ -59,7 +78,8 @@
         "duration": 60,
         "tasks": [
           { "task": "Resolver ejercicios de álgebra", "done": true },
-          { "task": "Repasar conceptos de cálculo", "done": false }
+          { "task": "Repasar conceptos de cálculo", "done": false },
+          { "task": "Estudiar ecuaciones diferenciales", "done": true }
         ]
       },
       {
@@ -67,7 +87,22 @@
         "start_time": "10:00",
         "end_time": "12:00",
         "duration": 120,
-        "tasks": [{ "task": "Estudiar teoría de integrales", "done": true }]
+        "tasks": [
+          { "task": "Estudiar teoría de integrales", "done": true },
+          { "task": "Resolver problemas de geometría", "done": false },
+          { "task": "Repasar límites", "done": true }
+        ]
+      },
+      {
+        "date": "2024-12-03",
+        "start_time": "13:00",
+        "end_time": "15:00",
+        "duration": 120,
+        "tasks": [
+          { "task": "Estudiar geometría analítica", "done": false },
+          { "task": "Repasar teoría de funciones", "done": true },
+          { "task": "Resolver problemas de álgebra lineal", "done": false }
+        ]
       }
     ]
   },
@@ -82,7 +117,9 @@
         "duration": 90,
         "tasks": [
           { "task": "Leer artículos sobre redes neuronales", "done": true },
-          { "task": "Escribir resumen", "done": false }
+          { "task": "Escribir resumen", "done": false },
+          { "task": "Revisar papers de machine learning", "done": false },
+          { "task": "Comparar algoritmos de IA", "done": true }
         ]
       },
       {
@@ -91,298 +128,64 @@
         "end_time": "12:00",
         "duration": 60,
         "tasks": [
-          { "task": "Revisar implementación de un modelo", "done": true }
+          { "task": "Revisar implementación de un modelo", "done": true },
+          { "task": "Leer sobre redes de convolución", "done": false },
+          { "task": "Analizar casos de uso de IA", "done": false }
+        ]
+      },
+      {
+        "date": "2024-12-04",
+        "start_time": "14:00",
+        "end_time": "16:00",
+        "duration": 120,
+        "tasks": [
+          { "task": "Leer sobre Deep Learning", "done": false },
+          { "task": "Realizar prueba con red neuronal", "done": false },
+          { "task": "Escribir conclusiones sobre investigación", "done": false }
         ]
       }
     ]
   },
   {
-    "id": "1",
-    "name": "Redacción de informe de tesis",
+    "id": "5",
+    "name": "Investigación en física cuántica",
     "sessions": [
       {
-        "date": "2024-12-03",
-        "start_time": "10:00",
+        "date": "2024-12-05",
+        "start_time": "09:00",
         "end_time": "10:30",
-        "duration": 30,
-        "tasks": [
-          { "task": "Escribir introducción", "done": true },
-          { "task": "Revisar referencias", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-03",
-        "start_time": "14:00",
-        "end_time": "15:00",
-        "duration": 60,
-        "tasks": [{ "task": "Revisar bibliografía", "done": true }]
-      }
-    ]
-  },
-  {
-    "id": "2",
-    "name": "Desarrollo de aplicación móvil",
-    "sessions": [
-      {
-        "date": "2024-12-02",
-        "start_time": "09:00",
-        "end_time": "11:00",
-        "duration": 120,
-        "tasks": [
-          { "task": "Diseñar prototipo", "done": true },
-          { "task": "Implementar pantalla de login", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-04",
-        "start_time": "13:00",
-        "end_time": "15:30",
-        "duration": 150,
-        "tasks": [
-          { "task": "Configurar base de datos", "done": true },
-          { "task": "Testear funciones principales", "done": false }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "3",
-    "name": "Preparación para examen de matemáticas",
-    "sessions": [
-      {
-        "date": "2024-12-01",
-        "start_time": "08:00",
-        "end_time": "09:00",
-        "duration": 60,
-        "tasks": [
-          { "task": "Resolver ejercicios de álgebra", "done": true },
-          { "task": "Repasar conceptos de cálculo", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-02",
-        "start_time": "10:00",
-        "end_time": "12:00",
-        "duration": 120,
-        "tasks": [{ "task": "Estudiar teoría de integrales", "done": true }]
-      }
-    ]
-  },
-  {
-    "id": "4",
-    "name": "Investigación sobre inteligencia artificial",
-    "sessions": [
-      {
-        "date": "2024-12-02",
-        "start_time": "16:00",
-        "end_time": "17:30",
         "duration": 90,
         "tasks": [
-          { "task": "Leer artículos sobre redes neuronales", "done": true },
-          { "task": "Escribir resumen", "done": false }
+          { "task": "Estudiar principios de mecánica cuántica", "done": false },
+          { "task": "Revisar experimentos de partículas", "done": false },
+          { "task": "Leer sobre el principio de incertidumbre", "done": true },
+          { "task": "Analizar la teoría de cuerdas", "done": false }
         ]
       },
       {
-        "date": "2024-12-03",
+        "date": "2024-12-06",
         "start_time": "11:00",
-        "end_time": "12:00",
-        "duration": 60,
-        "tasks": [
-          { "task": "Revisar implementación de un modelo", "done": true }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "1",
-    "name": "Redacción de informe de tesis",
-    "sessions": [
-      {
-        "date": "2024-12-03",
-        "start_time": "10:00",
-        "end_time": "10:30",
-        "duration": 30,
-        "tasks": [
-          { "task": "Escribir introducción", "done": true },
-          { "task": "Revisar referencias", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-03",
-        "start_time": "14:00",
-        "end_time": "15:00",
-        "duration": 60,
-        "tasks": [{ "task": "Revisar bibliografía", "done": true }]
-      }
-    ]
-  },
-  {
-    "id": "2",
-    "name": "Desarrollo de aplicación móvil",
-    "sessions": [
-      {
-        "date": "2024-12-02",
-        "start_time": "09:00",
-        "end_time": "11:00",
-        "duration": 120,
-        "tasks": [
-          { "task": "Diseñar prototipo", "done": true },
-          { "task": "Implementar pantalla de login", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-04",
-        "start_time": "13:00",
-        "end_time": "15:30",
-        "duration": 150,
-        "tasks": [
-          { "task": "Configurar base de datos", "done": true },
-          { "task": "Testear funciones principales", "done": false }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "3",
-    "name": "Preparación para examen de matemáticas",
-    "sessions": [
-      {
-        "date": "2024-12-01",
-        "start_time": "08:00",
-        "end_time": "09:00",
-        "duration": 60,
-        "tasks": [
-          { "task": "Resolver ejercicios de álgebra", "done": true },
-          { "task": "Repasar conceptos de cálculo", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-02",
-        "start_time": "10:00",
-        "end_time": "12:00",
-        "duration": 120,
-        "tasks": [{ "task": "Estudiar teoría de integrales", "done": true }]
-      }
-    ]
-  },
-  {
-    "id": "4",
-    "name": "Investigación sobre inteligencia artificial",
-    "sessions": [
-      {
-        "date": "2024-12-02",
-        "start_time": "16:00",
-        "end_time": "17:30",
+        "end_time": "12:30",
         "duration": 90,
         "tasks": [
-          { "task": "Leer artículos sobre redes neuronales", "done": true },
-          { "task": "Escribir resumen", "done": false }
+          { "task": "Leer sobre entrelazamiento cuántico", "done": false },
+          { "task": "Analizar resultados experimentales", "done": true },
+          { "task": "Estudiar ecuaciones de Schrödinger", "done": false },
+          { "task": "Verificar pruebas experimentales", "done": true }
         ]
       },
       {
-        "date": "2024-12-03",
-        "start_time": "11:00",
-        "end_time": "12:00",
-        "duration": 60,
-        "tasks": [
-          { "task": "Revisar implementación de un modelo", "done": true }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "1",
-    "name": "Redacción de informe de tesis",
-    "sessions": [
-      {
-        "date": "2024-12-03",
-        "start_time": "10:00",
-        "end_time": "10:30",
-        "duration": 30,
-        "tasks": [
-          { "task": "Escribir introducción", "done": true },
-          { "task": "Revisar referencias", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-03",
-        "start_time": "14:00",
-        "end_time": "15:00",
-        "duration": 60,
-        "tasks": [{ "task": "Revisar bibliografía", "done": true }]
-      }
-    ]
-  },
-  {
-    "id": "2",
-    "name": "Desarrollo de aplicación móvil",
-    "sessions": [
-      {
-        "date": "2024-12-02",
-        "start_time": "09:00",
-        "end_time": "11:00",
-        "duration": 120,
-        "tasks": [
-          { "task": "Diseñar prototipo", "done": true },
-          { "task": "Implementar pantalla de login", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-04",
-        "start_time": "13:00",
-        "end_time": "15:30",
-        "duration": 150,
-        "tasks": [
-          { "task": "Configurar base de datos", "done": true },
-          { "task": "Testear funciones principales", "done": false }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "3",
-    "name": "Preparación para examen de matemáticas",
-    "sessions": [
-      {
-        "date": "2024-12-01",
-        "start_time": "08:00",
-        "end_time": "09:00",
-        "duration": 60,
-        "tasks": [
-          { "task": "Resolver ejercicios de álgebra", "done": true },
-          { "task": "Repasar conceptos de cálculo", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-02",
-        "start_time": "10:00",
-        "end_time": "12:00",
-        "duration": 120,
-        "tasks": [{ "task": "Estudiar teoría de integrales", "done": true }]
-      }
-    ]
-  },
-  {
-    "id": "4",
-    "name": "Investigación sobre inteligencia artificial",
-    "sessions": [
-      {
-        "date": "2024-12-02",
-        "start_time": "16:00",
-        "end_time": "17:30",
+        "date": "2024-12-07",
+        "start_time": "15:00",
+        "end_time": "16:30",
         "duration": 90,
         "tasks": [
-          { "task": "Leer artículos sobre redes neuronales", "done": true },
-          { "task": "Escribir resumen", "done": false }
-        ]
-      },
-      {
-        "date": "2024-12-03",
-        "start_time": "11:00",
-        "end_time": "12:00",
-        "duration": 60,
-        "tasks": [
-          { "task": "Revisar implementación de un modelo", "done": true }
+          {
+            "task": "Leer artículos sobre computación cuántica",
+            "done": false
+          },
+          { "task": "Revisar investigaciones actuales", "done": false },
+          { "task": "Realizar simulaciones cuánticas", "done": false }
         ]
       }
     ]
